@@ -28,6 +28,8 @@ rm -rf /var/cache/oracle-jdk8-installer
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
+
+
 # Get Tomcat
 RUN wget --quiet --no-cookies http://apache.rediris.es/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/tomcat.tgz && \
 tar xzvf /tmp/tomcat.tgz -C /opt && \
@@ -42,6 +44,12 @@ ADD tomcat-users.xml /opt/tomcat/conf/
 
 ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
+
+
+Run apt-get install -y curl
+Run apt-get install -y vim
+
+COPY System.war /opt/tomcat/webapps/
 
 EXPOSE 8080
 EXPOSE 8009
